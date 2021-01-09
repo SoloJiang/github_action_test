@@ -22,4 +22,4 @@ jobs:
     - run: echo 0
     - if: github.ref == 'master' || github.ref == 'release-next'
       run: echo 1
-    - run: echo 2
+    - run: echo github.ref
