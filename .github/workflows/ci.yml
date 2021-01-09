@@ -20,6 +20,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: https://registry.npmjs.org/
     - run: echo 0
-    - if: $BRANCH_NAME == 'master' || $BRANCH_NAME == 'release-next'
+    - if: github.ref == 'master' || github.ref == 'release-next'
       run: echo 1
     - run: echo 2
