@@ -14,13 +14,19 @@ jobs:
       run: echo >>$GITHUB_ENV BRANCH_NAME=${GITHUB_REF#refs/heads/}
     - name: Echo branch name
       run: echo ${BRANCH_NAME}
+    - name: Check Branch
+      id: check-branch
+      run: |
+          if [[ ${{ genv.BRANCH_NAME }} =~ ^(master|release-next)$|^hotfix\/* ]]; then
+              echo ::set-output name=match::true
+          fi
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: https://registry.npmjs.org/
     - run: echo 0
-    - if: [[ ${{env.BRANCH_NAME}} =~ ^(master|release-next)$|^hotfix\/* ]]
+    - if: steps.check-branch.outputs.match == 'true'
       run: echo 1
     - if: env.BRANCH_NAME == 'test/1.0.0'
       run: echo 2
