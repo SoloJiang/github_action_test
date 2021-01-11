@@ -17,7 +17,7 @@ jobs:
     - name: Check Branch
       id: check-branch
       run: |
-          if [[ ${{ genv.BRANCH_NAME }} =~ ^(master|release-next)$|^hotfix\/* ]]; then
+          if [[ ${{ env.BRANCH_NAME }} =~ ^(master|release-next)$|^hotfix\/* ]]; then
               echo ::set-output name=match::true
           fi
     - name: Use Node.js ${{ matrix.node-version }}
