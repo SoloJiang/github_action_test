@@ -20,7 +20,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: https://registry.npmjs.org/
     - run: echo 0
-    - if: env.BRANCH_NAME =~ ^(master|release-next)$|^hotfix\/*
+    - if: [[ ${{env.BRANCH_NAME}} =~ ^(master|release-next)$|^hotfix\/* ]]
       run: echo 1
     - if: env.BRANCH_NAME == 'test/1.0.0'
       run: echo 2
